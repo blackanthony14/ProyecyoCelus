@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 15, 2021 at 04:30 PM
+-- Generation Time: Nov 15, 2021 at 04:52 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `nombre` varchar(200) NOT NULL,
   `codigoId` varchar(200) NOT NULL,
   `puesto` varchar(200) NOT NULL,
-  `rol` varchar(200) DEFAULT NULL,
+  `rol` varchar(200) NOT NULL,
   `fotografia` varchar(500) DEFAULT NULL,
   `descripcion` varchar(500) DEFAULT NULL,
   `anotacionE` varchar(500) DEFAULT NULL,

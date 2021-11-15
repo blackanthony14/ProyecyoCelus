@@ -53,7 +53,7 @@ class Empleado(db.Model):
     nombre = db.Column(db.String(200),nullable=False)
     codigoId =db.Column(db.String(200),nullable=False)
     puesto = db.Column(db.String(200), nullable=False)
-    rol = db.Column(db.String(200),)
+    rol = db.Column(db.String(200), nullable=False)
     fotografia = db.Column(db.String(500))
     descripcion = db.Column(db.String(500))
     anotacionE = db.Column(db.String(500))
@@ -117,7 +117,7 @@ def add_empleado():
     
         return empleado_schema.jsonify(my_posts)
     except Exception:
-        s = "Es obligatorio llenar las casilla : nombre, codigoId y puesto"
+        s = "Es obligatorio llenar las casilla : nombre, codigoId, puesto y rol"
         return jsonify(s)
 
 
