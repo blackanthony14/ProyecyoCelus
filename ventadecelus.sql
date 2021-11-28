@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 28, 2021 at 05:04 PM
+-- Generation Time: Nov 28, 2021 at 06:06 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -69,18 +69,7 @@ CREATE TABLE IF NOT EXISTS `transacciones` (
   `user_id` int(11) NOT NULL,
   `telefono_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `transacciones`
---
-
-INSERT INTO `transacciones` (`id`, `user_id`, `telefono_id`) VALUES
-(1, 1, 1),
-(2, 1, 1),
-(3, 1, 1),
-(4, 1, 1),
-(5, 1, 2);
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -95,18 +84,18 @@ CREATE TABLE IF NOT EXISTS `user` (
   `name` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `admin` tinyint(1) DEFAULT NULL,
+  `recoverPass` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `public_id` (`public_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `public_id`, `name`, `password`, `admin`) VALUES
-(1, '6f7debe5-0d15-4897-8208-1308108590d9', 'admin', 'sha256$zcv2RfQcXarm0WU1$7c6def35cede261015e65ed2bd56ad0c0d19de4366000128540df5f9c9988911', 1),
-(2, 'b84e9129-3d82-4cab-81a4-c08c6f818683', 'Anthony', 'sha256$jzI1AvCEYtQPK0T4$e85d2ce4e43a954486b508a380ee34fcd62f52888241d7f89bbeaa12684220a0', 1),
-(3, '8e06bb88-3ab4-467b-a325-665561e1bed6', 'Paul', 'sha256$hFr2PsmQw0GQn9LD$6fda45f47e89fe685803d378022abddb72ed87265bbb09b69207a371c865f2c1', 0);
+INSERT INTO `user` (`id`, `public_id`, `name`, `password`, `admin`, `recoverPass`) VALUES
+(1, 'cb94e99f-a664-4bb1-ab0e-d270d65b2c61', 'Paul', 'sha256$mgnxydUCqXojo9cn$5e0a3dfd31e5191b1d29b5af9c470cc10c99f230093ec7a7e9ee366e1710fe96', 0, '12345'),
+(2, '215391b6-6b05-41e2-8216-830e788bc6ab', 'Anthony', 'sha256$3GOKXTG3gSY2TwV1$bb03bdf4cc80409ee6dd628d2ef940cdfb84d6c9864814a180ccfd9b6cf77ef1', 1, '12345');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

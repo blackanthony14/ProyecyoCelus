@@ -53,16 +53,18 @@ class User(db.Model):
     name = db.Column(db.String(100), nullable=False)
     password =db.Column(db.String(100), nullable=False)
     admin = db.Column(db.Boolean)
+    recoverPass = db.Column(db.String(100),nullable=False)
     
-    def __init__(self, public_id, name, password, admin):
+    def __init__(self, public_id, name, password, admin, recoverPass):
         self.public_id = public_id
         self.name = name
         self.password = password
-        self.admin = admin 
+        self.admin = admin
+        self.recoverPass = recoverPass 
 
 class UserSchema(ma.Schema):
     class Meta:
-        fields = ("id","public_id","name","password","admin")
+        fields = ("id","public_id","name","password","admin", "recoverPass")
         
 
 user_schema = UserSchema()
@@ -162,19 +164,19 @@ def create_user():
     try:
         password = request.json['password']   
         name = request.json['name']
+        recoverPass = password
         hashed_password = generate_password_hash(password, method='sha256')
         password = hashed_password
         public_id = str(uuid.uuid4())
         admin = False
 
-        new_user = User(public_id, name, password, admin)
+        new_user = User(public_id, name, password, admin,recoverPass)
         db.session.add(new_user)
         db.session.commit()
 
         return jsonify({'message' : 'New user created!'})
     except Exception:
         return jsonify({'message' : 'Mal ingreso de datos'})
-
 
 @app.route('/login')
 def login():
@@ -382,3 +384,14 @@ def delete_telefono(current_user,id):
     except Exception:
         return jsonify({'message' : 'Telefono no existente'})
     
+
+
+@app.route('/recover')
+def recover_pass():
+    try:
+        name = request.json['name']
+        all_item = User.query.filter_by(name = name).all()
+        result = users_schema.dump(all_item)
+        return jsonify(result)
+    except Exception:
+        return jsonify({'message' : 'Usuario no existente'})
